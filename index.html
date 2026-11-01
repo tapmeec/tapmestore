@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tap Me Store - Conecta con un toque</title>
+    <style>
+        :root {
+            --primary-bg: #8B78EE; /* Color lavanda corporativo Tap Me */
+            --card-bg: #1A1A24;
+            --card-border: #2E2E3E;
+            --accent: #10B981;
+            --text-main: #FFFFFF;
+            --text-muted: #A0A0B0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            padding-bottom: 90px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cabecera Estilo Linkbio */
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .logo-circle {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #111;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            letter-spacing: -1px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Secciones */
+        .section-title {
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 0 10px;
+            color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 4px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .product-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .product-pricing {
+            font-size: 11px;
+            color: #E2E8F0;
+            background: #252533;
+            padding: 6px 10px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .product-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+        }
+
+        .price-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .btn-add {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .btn-add:active {
+            transform: scale(0.95);
+        }
+
+        /* Barra Inferior del Carrito */
+        .cart-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #111118;
+            border-top: 1px solid var(--card-border);
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .cart-info {
+            font-size: 14px;
+        }
+
+        .cart-total {
+            font-weight: 700;
+            font-size: 16px;
+            color: #10B981;
+        }
+
+        .btn-checkout {
+            background: #25D366;
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Modal de Checkout */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1A1A24;
+            width: 100%;
+            max-width: 480px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 20px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h2 {
+            font-size: 18px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .cart-items-list {
+            margin-bottom: 16px;
+            max-height: 180px;
+            overflow-y: auto;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+        }
+
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            background: #252533;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .btn-submit-order {
+            width: 100%;
+            background: #25D366;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Cabecera -->
+        <div class="header">
+            <div class="logo-circle">TAP ME</div>
+            <h1>TAP ME STORE</h1>
+            <p>Conecta con un toque</p>
+        </div>
+
+        <div class="section-title">Nuestros Productos NFC</div>
+
+        <!-- Producto: Stickers -->
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Sticker NFC</h3>
+                <p class="product-desc">Pégalo en tu teléfono o local. ¡Página Linkbio GRATIS a partir de 12 unidades! Menos de 12 unidades pagan $5 extra por la página.</p>
+                <span class="product-pricing">$1.10 c/u | Página Linkbio: Gratis desde 12u (o $5 si piden menos)</span>
+            </div>
+            <div class="product-action">
+                <span class="price-tag">$1.10</span>
+                <button class="btn-add" onclick="cambiarCantidadSticker(1)">+ Agregar</button>
+            </div>
+        </div>
+
+        <!-- Producto: Tarjetas -->
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Tarjeta NFC (Tamaño Crédito)</h3>
+                <p class="product-desc">PVC calidad premium con tecnología NFC y QR. Incluye página Linkbio.</p>
+                <span class="product-pricing">$20 c/u (A partir de 12 unidades bajan a $15 c/u)</span>
+            </div>
+            <div class="product-action">
+                <span class="price-tag">$20.00</span>
+                <button class="btn-add" onclick="agregarTarjeta()">+ Agregar Tarjeta</button>
+            </div>
+        </div>
+
+        <!-- Producto: Placas -->
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Placa NFC para Negocios (12x12 cm)</h3>
+                <p class="product-desc">Ideal para mesas o mostradores. Incluye la placa y su respectiva página Linkbio.</p>
+                <span class="product-pricing">$20.00 c/u (Incluye página Linkbio)</span>
+            </div>
+            <div class="product-action">
+                <span class="price-tag">$20.00</span>
+                <button class="btn-add" onclick="agregarPlaca()">+ Agregar Placa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra Inferior del Carrito -->
+    <div class="cart-bar">
+        <div class="cart-info">
+            <div>Total ítems: <span id="cart-count">0</span></div>
+            <div class="cart-total" id="cart-total-text">$0.00</div>
+        </div>
+        <button class="btn-checkout" onclick="abrirModal()">Finalizar Pedido 💬</button>
+    </div>
+
+    <!-- Modal de Checkout -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Resumen de tu Pedido</h2>
+                <button class="close-btn" onclick="cerrarModal()">&times;</button>
+            </div>
+
+            <div class="cart-items-list" id="modal-items-container"></div>
+
+            <div class="form-group">
+                <label>Tu Nombre o Empresa</label>
+                <input type="text" id="clientName" placeholder="Ej. María López">
+            </div>
+
+            <div class="form-group">
+                <label>Dirección de Envío / Ciudad</label>
+                <input type="text" id="clientAddress" placeholder="Ej. Quito / Cumbayá">
+            </div>
+
+            <button class="btn-submit-order" onclick="enviarPedidoWhatsApp()">Enviar pedido por WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        // Estado del pedido
+        let cantidadStickers = 0;
+        let cantidadTarjetas = 0;
+        let cantidadPlacas = 0;
+
+        function cambiarCantidadSticker(delta) {
+            cantidadStickers = Math.max(0, cantidadStickers + delta);
+            actualizarUI();
+        }
+
+        function agregarTarjeta() {
+            cantidadTarjetas += 1;
+            actualizarUI();
+        }
+
+        function agregarPlaca() {
+            cantidadPlacas += 1;
+            actualizarUI();
+        }
+
+        function calcularTotales() {
+            let totalStickersPrecio = cantidadStickers * 1.10;
+            
+            // Regla de tarjetas: $20 normales, $15 si son >= 12
+            let precioUnitTarjeta = (cantidadTarjetas >= 12) ? 15.00 : 20.00;
+            let totalTarjetasPrecio = cantidadTarjetas * precioUnitTarjeta;
+
+            let totalPlacasPrecio = cantidadPlacas * 20.00;
+
+            // Regla de la página de stickers: Si pide > 0 y < 12, se suman $5 por la página Linkbio
+            let costoPaginaStickers = 0;
+            let textoPaginaStickers = "";
+            if (cantidadStickers > 0) {
+                if (cantidadStickers >= 12) {
+                    textoPaginaStickers = "Página Linkbio: ¡GRATIS (por llevar 12+)!";
+                } else {
+                    costoPaginaStickers = 5.00;
+                    textoPaginaStickers = "Configuración Página Linkbio (Menos de 12u)";
+                }
+            }
+
+            let subtotalProductos = totalStickersPrecio + totalTarjetasPrecio + totalPlacasPrecio;
+            let granTotal = subtotalProductos + costoPaginaStickers;
+            let totalItems = cantidadStickers + cantidadTarjetas + cantidadPlacas;
+
+            return {
+                totalStickersPrecio,
+                precioUnitTarjeta,
+                totalTarjetasPrecio,
+                totalPlacasPrecio,
+                costoPaginaStickers,
+                textoPaginaStickers,
+                granTotal,
+                totalItems
+            };
+        }
+
+        function actualizarUI() {
+            let res = calcularTotales();
+            document.getElementById('cart-count').innerText = res.totalItems;
+            document.getElementById('cart-total-text').innerText = '$' + res.granTotal.toFixed(2);
+        }
+
+        function abrirModal() {
+            let res = calcularTotales();
+            if (res.totalItems === 0) {
+                alert("Tu carrito está vacío. Agrega al menos un producto.");
+                return;
+            }
+
+            let container = document.getElementById('modal-items-container');
+            container.innerHTML = '';
+
+            if (cantidadStickers > 0) {
+                container.innerHTML += `<div class="cart-item-row"><span>${cantidadStickers}x Sticker NFC ($1.10 c/u)</span><span>$${res.totalStickersPrecio.toFixed(2)}</span></div>`;
+            }
+            if (cantidadTarjetas > 0) {
+                container.innerHTML += `<div class="cart-item-row"><span>${cantidadTarjetas}x Tarjeta NFC ($${res.precioUnitTarjeta} c/u)</span><span>$${res.totalTarjetasPrecio.toFixed(2)}</span></div>`;
+            }
+            if (cantidadPlacas > 0) {
+                container.innerHTML += `<div class="cart-item-row"><span>${cantidadPlacas}x Placa NFC 12x12cm</span><span>$${res.totalPlacasPrecio.toFixed(2)}</span></div>`;
+            }
+            if (cantidadStickers > 0 && cantidadStickers < 12) {
+                container.innerHTML += `<div class="cart-item-row" style="color: #A0A0B0;"><span>➕ ${res.textoPaginaStickers}</span><span>$5.00</span></div>`;
+            } else if (cantidadStickers >= 12) {
+                container.innerHTML += `<div class="cart-item-row" style="color: #10B981;"><span>✨ ${res.textoPaginaStickers}</span><span>$0.00</span></div>`;
+            }
+
+            document.getElementById('checkoutModal').classList.add('active');
+        }
+
+        function cerrarModal() {
+            document.getElementById('checkoutModal').classList.remove('active');
+        }
+
+        function enviarPedidoWhatsApp() {
+            const nombre = document.getElementById('clientName').value.trim();
+            const direccion = document.getElementById('clientAddress').value.trim();
+
+            if (!nombre || !direccion) {
+                alert("Por favor completa tu nombre y dirección de envío.");
+                return;
+            }
+
+            let res = calcularTotales();
+            let mensaje = `¡Hola! Quiero hacer el siguiente pedido en *Tap Me Store*:\n\n`;
+
+            if (cantidadStickers > 0) {
+                mensaje += `• ${cantidadStickers}x Stickers NFC ($${res.totalStickersPrecio.toFixed(2)})\n`;
+            }
+            if (cantidadTarjetas > 0) {
+                mensaje += `• ${cantidadTarjetas}x Tarjetas NFC ($${res.totalTarjetasPrecio.toFixed(2)})\n`;
+            }
+            if (cantidadPlacas > 0) {
+                mensaje += `• ${cantidadPlacas}x Placas NFC 12x12cm ($${res.totalPlacasPrecio.toFixed(2)})\n`;
+            }
+            if (cantidadStickers > 0 && cantidadStickers < 12) {
+                mensaje += `• 1x Configuración Página Linkbio (Stickers <12u) ($5.00)\n`;
+            } else if (cantidadStickers >= 12) {
+                mensaje += `• Página Linkbio para stickers: ¡GRATIS (por volumen)!\n`;
+            }
+
+            mensaje += `\n*Total a pagar:* $${res.granTotal.toFixed(2)}`;
+            mensaje += `\n\n👤 *Cliente:* ${nombre}`;
+            mensaje += `\n📍 *Dirección:* ${direccion}`;
+
+            const numeroWhatsApp = "593988725270"; // Tu número Tap Me
+            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
