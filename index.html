@@ -80,20 +80,69 @@
             padding-bottom: 4px;
         }
 
+        /* Tarjeta de Producto con Imagen de Referencia */
         .product-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .product-card.promo {
+            border: 2px solid #10B981;
+        }
+
+        .product-image-box {
+            width: 100%;
+            height: 160px;
+            background: #252533;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image-box:hover img {
+            transform: scale(1.05);
+        }
+
+        .badge-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #10B981;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .product-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .product-info h3 {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
             color: var(--text-main);
             margin-bottom: 4px;
@@ -112,18 +161,19 @@
             padding: 6px 10px;
             border-radius: 8px;
             display: inline-block;
-            margin-top: 4px;
         }
 
         .product-action {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 6px;
+            margin-top: 8px;
+            border-top: 1px solid var(--card-border);
+            padding-top: 12px;
         }
 
         .price-tag {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 700;
             color: #fff;
         }
@@ -288,44 +338,100 @@
             <p>Conecta con un toque</p>
         </div>
 
-        <div class="section-title">Nuestros Productos NFC</div>
+        <div class="section-title">🚀 Packs Destacados & Empresariales</div>
+
+        <!-- Pack Emprendedor -->
+        <div class="product-card promo">
+            <div class="product-image-box">
+                <span class="badge-tag">Pack Emprendedor</span>
+                <!-- Puedes cambiar el enlace de la imagen por una foto real de tus stickers -->
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Pack Emprendedor Stickers">
+            </div>
+            <div class="product-body">
+                <div class="product-info">
+                    <h3>Pack 12 Stickers NFC Pro</h3>
+                    <p class="product-desc">Ideal para equipar a todo tu equipo o sucursales. Incluye las 12 páginas Linkbio totalmente configuradas.</p>
+                    <span class="product-pricing">Ahorro masivo por volumen | Páginas incluidas</span>
+                </div>
+                <div class="product-action">
+                    <span class="price-tag">$14.99</span>
+                    <button class="btn-add" onclick="agregarAlCarrito('Pack 12 Stickers NFC Pro + Páginas', 14.99)">Agregar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pack Corporativo Tarjetas -->
+        <div class="product-card promo">
+            <div class="product-image-box">
+                <span class="badge-tag">Corporativo</span>
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Pack Tarjetas Corporativas">
+            </div>
+            <div class="product-body">
+                <div class="product-info">
+                    <h3>Pack 12 Tarjetas NFC PVC</h3>
+                    <p class="product-desc">Tarjetas de presentación inteligentes tamaño crédito con diseño ejecutivo y QR. A partir de 12 unidades bajan de precio.</p>
+                    <span class="product-pricing">Precio especial x mayor ($14.99 c/u)</span>
+                </div>
+                <div class="product-action">
+                    <span class="price-tag">$179.88</span>
+                    <button class="btn-add" onclick="agregarAlCarrito('Pack 12 Tarjetas NFC Corporativas (Precio x Mayor)', 179.88)">Agregar Pack</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">Productos Individuales</div>
 
         <!-- Producto: Stickers -->
         <div class="product-card">
-            <div class="product-info">
-                <h3>Sticker NFC</h3>
-                <p class="product-desc">Pégalo en tu teléfono o local. ¡Página Linkbio GRATIS a partir de 12 unidades! Menos de 12 unidades pagan $5 extra por la página.</p>
-                <span class="product-pricing">$1.10 c/u | Página Linkbio: Gratis desde 12u (o $5 si piden menos)</span>
+            <div class="product-image-box">
+                <img src="https://images.unsplash.com/photo-1572375176046-295639dc273d?auto=format&fit=crop&w=600&q=80" alt="Sticker NFC">
             </div>
-            <div class="product-action">
-                <span class="price-tag">$1.10</span>
-                <button class="btn-add" onclick="cambiarCantidadSticker(1)">+ Agregar</button>
+            <div class="product-body">
+                <div class="product-info">
+                    <h3>Sticker NFC Individual</h3>
+                    <p class="product-desc">Pégalo donde prefieras. Página Linkbio GRATIS si pides 12 o más; pedidos menores llevan un costo adicional de $5 por la página.</p>
+                    <span class="product-pricing">$1.10 c/u (Página suelta: $5 si pides menos de 12u)</span>
+                </div>
+                <div class="product-action">
+                    <span class="price-tag">$1.10</span>
+                    <button class="btn-add" onclick="cambiarCantidadSticker(1)">+ Agregar</button>
+                </div>
             </div>
         </div>
 
         <!-- Producto: Tarjetas -->
         <div class="product-card">
-            <div class="product-info">
-                <h3>Tarjeta NFC (Tamaño Crédito)</h3>
-                <p class="product-desc">PVC calidad premium con tecnología NFC y QR. Incluye página Linkbio.</p>
-                <span class="product-pricing">$20 c/u (A partir de 12 unidades bajan a $15 c/u)</span>
+            <div class="product-image-box">
+                <img src="https://images.unsplash.com/photo-1556742049-0a67d553c2a5?auto=format&fit=crop&w=600&q=80" alt="Tarjeta NFC">
             </div>
-            <div class="product-action">
-                <span class="price-tag">$20.00</span>
-                <button class="btn-add" onclick="agregarTarjeta()">+ Agregar Tarjeta</button>
+            <div class="product-body">
+                <div class="product-info">
+                    <h3>Tarjeta NFC Individual (Crédito)</h3>
+                    <p class="product-desc">PVC acabado profesional con chip NFC y código QR. Incluye página Linkbio.</p>
+                    <span class="product-pricing">$19.99 c/u (Baja a $14.99 a partir de 12 unidades)</span>
+                </div>
+                <div class="product-action">
+                    <span class="price-tag">$19.99</span>
+                    <button class="btn-add" onclick="agregarTarjetaIndividual()">+ Agregar</button>
+                </div>
             </div>
         </div>
 
         <!-- Producto: Placas -->
         <div class="product-card">
-            <div class="product-info">
-                <h3>Placa NFC para Negocios (12x12 cm)</h3>
-                <p class="product-desc">Ideal para mesas o mostradores. Incluye la placa y su respectiva página Linkbio.</p>
-                <span class="product-pricing">$20.00 c/u (Incluye página Linkbio)</span>
+            <div class="product-image-box">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="Placa NFC Negocios">
             </div>
-            <div class="product-action">
-                <span class="price-tag">$20.00</span>
-                <button class="btn-add" onclick="agregarPlaca()">+ Agregar Placa</button>
+            <div class="product-body">
+                <div class="product-info">
+                    <h3>Placa NFC para Negocios (12x12 cm)</h3>
+                    <p class="product-desc">Diseñada para mesas o mostradores de restaurantes y locales comerciales. Incluye placa y su página Linkbio.</p>
+                    <span class="product-pricing">Precio único incluye diseño y placa</span>
+                </div>
+                <div class="product-action">
+                    <span class="price-tag">$19.99</span>
+                    <button class="btn-add" onclick="agregarPlaca()">+ Agregar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -351,7 +457,7 @@
 
             <div class="form-group">
                 <label>Tu Nombre o Empresa</label>
-                <input type="text" id="clientName" placeholder="Ej. María López">
+                <input type="text" id="clientName" placeholder="Ej. Carlos Mendoza">
             </div>
 
             <div class="form-group">
@@ -364,59 +470,62 @@
     </div>
 
     <script>
-        // Estado del pedido
         let cantidadStickers = 0;
-        let cantidadTarjetas = 0;
-        let cantidadPlacas = 0;
+        let cantidadTarjetasInd = 0;
+        let itemsEspeciales = []; // Para packs o placas
 
         function cambiarCantidadSticker(delta) {
             cantidadStickers = Math.max(0, cantidadStickers + delta);
             actualizarUI();
         }
 
-        function agregarTarjeta() {
-            cantidadTarjetas += 1;
+        function agregarTarjetaIndividual() {
+            cantidadTarjetasInd += 1;
+            actualizarUI();
+        }
+
+        function agregarAlCarrito(nombre, precio) {
+            itemsEspeciales.push({ name: nombre, price: precio });
             actualizarUI();
         }
 
         function agregarPlaca() {
-            cantidadPlacas += 1;
+            itemsEspeciales.push({ name: 'Placa NFC 12x12 cm', price: 19.99 });
             actualizarUI();
         }
 
         function calcularTotales() {
             let totalStickersPrecio = cantidadStickers * 1.10;
             
-            // Regla de tarjetas: $20 normales, $15 si son >= 12
-            let precioUnitTarjeta = (cantidadTarjetas >= 12) ? 15.00 : 20.00;
-            let totalTarjetasPrecio = cantidadTarjetas * precioUnitTarjeta;
+            // Si piden 12 o más tarjetas individuales, aplican a $14.99 c/u
+            let precioUnitTarjeta = (cantidadTarjetasInd >= 12) ? 14.99 : 19.99;
+            let totalTarjetasPrecio = cantidadTarjetasInd * precioUnitTarjeta;
 
-            let totalPlacasPrecio = cantidadPlacas * 20.00;
+            let totalEspecialesPrecio = itemsEspeciales.reduce((acc, item) => acc + item.price, 0);
 
-            // Regla de la página de stickers: Si pide > 0 y < 12, se suman $5 por la página Linkbio
+            // Costo de página para stickers si son menos de 12
             let costoPaginaStickers = 0;
             let textoPaginaStickers = "";
             if (cantidadStickers > 0) {
                 if (cantidadStickers >= 12) {
-                    textoPaginaStickers = "Página Linkbio: ¡GRATIS (por llevar 12+)!";
+                    textoPaginaStickers = "Página Linkbio: ¡GRATIS (por volumen 12+)!";
                 } else {
                     costoPaginaStickers = 5.00;
-                    textoPaginaStickers = "Configuración Página Linkbio (Menos de 12u)";
+                    textoPaginaStickers = "Configuración Página Linkbio (Stickers <12u)";
                 }
             }
 
-            let subtotalProductos = totalStickersPrecio + totalTarjetasPrecio + totalPlacasPrecio;
-            let granTotal = subtotalProductos + costoPaginaStickers;
-            let totalItems = cantidadStickers + cantidadTarjetas + cantidadPlacas;
+            let subtotal = totalStickersPrecio + totalTarjetasPrecio + totalEspecialesPrecio + costoPaginaStickers;
+            let totalItems = cantidadStickers + cantidadTarjetasInd + itemsEspeciales.length;
 
             return {
                 totalStickersPrecio,
                 precioUnitTarjeta,
                 totalTarjetasPrecio,
-                totalPlacasPrecio,
+                totalEspecialesPrecio,
                 costoPaginaStickers,
                 textoPaginaStickers,
-                granTotal,
+                granTotal: subtotal,
                 totalItems
             };
         }
@@ -440,12 +549,12 @@
             if (cantidadStickers > 0) {
                 container.innerHTML += `<div class="cart-item-row"><span>${cantidadStickers}x Sticker NFC ($1.10 c/u)</span><span>$${res.totalStickersPrecio.toFixed(2)}</span></div>`;
             }
-            if (cantidadTarjetas > 0) {
-                container.innerHTML += `<div class="cart-item-row"><span>${cantidadTarjetas}x Tarjeta NFC ($${res.precioUnitTarjeta} c/u)</span><span>$${res.totalTarjetasPrecio.toFixed(2)}</span></div>`;
+            if (cantidadTarjetasInd > 0) {
+                container.innerHTML += `<div class="cart-item-row"><span>${cantidadTarjetasInd}x Tarjeta NFC ($${res.precioUnitTarjeta} c/u)</span><span>$${res.totalTarjetasPrecio.toFixed(2)}</span></div>`;
             }
-            if (cantidadPlacas > 0) {
-                container.innerHTML += `<div class="cart-item-row"><span>${cantidadPlacas}x Placa NFC 12x12cm</span><span>$${res.totalPlacasPrecio.toFixed(2)}</span></div>`;
-            }
+            itemsEspeciales.forEach(item => {
+                container.innerHTML += `<div class="cart-item-row"><span>1x ${item.name}</span><span>$${item.price.toFixed(2)}</span></div>`;
+            });
             if (cantidadStickers > 0 && cantidadStickers < 12) {
                 container.innerHTML += `<div class="cart-item-row" style="color: #A0A0B0;"><span>➕ ${res.textoPaginaStickers}</span><span>$5.00</span></div>`;
             } else if (cantidadStickers >= 12) {
@@ -474,12 +583,12 @@
             if (cantidadStickers > 0) {
                 mensaje += `• ${cantidadStickers}x Stickers NFC ($${res.totalStickersPrecio.toFixed(2)})\n`;
             }
-            if (cantidadTarjetas > 0) {
-                mensaje += `• ${cantidadTarjetas}x Tarjetas NFC ($${res.totalTarjetasPrecio.toFixed(2)})\n`;
+            if (cantidadTarjetasInd > 0) {
+                mensaje += `• ${cantidadTarjetasInd}x Tarjetas NFC ($${res.totalTarjetasPrecio.toFixed(2)})\n`;
             }
-            if (cantidadPlacas > 0) {
-                mensaje += `• ${cantidadPlacas}x Placas NFC 12x12cm ($${res.totalPlacasPrecio.toFixed(2)})\n`;
-            }
+            itemsEspeciales.forEach(item => {
+                mensaje += `• 1x ${item.name} ($${item.price.toFixed(2)})\n`;
+            });
             if (cantidadStickers > 0 && cantidadStickers < 12) {
                 mensaje += `• 1x Configuración Página Linkbio (Stickers <12u) ($5.00)\n`;
             } else if (cantidadStickers >= 12) {
@@ -490,7 +599,7 @@
             mensaje += `\n\n👤 *Cliente:* ${nombre}`;
             mensaje += `\n📍 *Dirección:* ${direccion}`;
 
-            const numeroWhatsApp = "593988725270"; // Tu número Tap Me
+            const numeroWhatsApp = "593988725270"; // Tu WhatsApp Tap Me
             const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
             
             window.open(url, '_blank');
