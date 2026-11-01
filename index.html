@@ -98,7 +98,7 @@
 
         .product-image-box {
             width: 100%;
-            height: 160px;
+            height: 150px;
             background: #252533;
             display: flex;
             align-items: center;
@@ -338,43 +338,61 @@
             <p>Conecta con un toque</p>
         </div>
 
-        <div class="section-title">🚀 Packs Destacados & Empresariales</div>
+        <div class="section-title">🔥 Combos & Promociones Destacadas</div>
 
-        <!-- Pack Emprendedor -->
+        <!-- Combo Estrella: Placa + Tarjeta -->
+        <div class="product-card promo">
+            <div class="product-image-box">
+                <span class="badge-tag">Recomendado</span>
+                <img src="https://images.unsplash.com/photo-1556742049-0a67d553c2a5?auto=format&fit=crop&w=600&q=80" alt="Combo Ejecutivo Placa y Tarjeta">
+            </div>
+            <div class="product-body">
+                <div class="product-info">
+                    <h3>Combo Ejecutivo (1 Placa 12x12 + 1 Tarjeta NFC)</h3>
+                    <p class="product-desc">La combinación perfecta: la placa para el mostrador o mesa de tu local y la tarjeta física para llevar en tu bolsillo a reuniones. Páginas Linkbio incluidas.</p>
+                    <span class="product-pricing">Ahorro especial | Solución presencial completa</span>
+                </div>
+                <div class="product-action">
+                    <span class="price-tag">$29.99</span>
+                    <button class="btn-add" onclick="agregarAlCarrito('Combo Ejecutivo (1 Placa + 1 Tarjeta)', 29.99)">Agregar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Combo Networking (Tarjeta + 2 Stickers) -->
+        <div class="product-card promo">
+            <div class="product-image-box">
+                <span class="badge-tag">Más Vendido</span>
+                <img src="https://images.unsplash.com/photo-1534536281715-e28d76684b4d?auto=format&fit=crop&w=600&q=80" alt="Combo Networking">
+            </div>
+            <div class="product-body">
+                <div class="product-info">
+                    <h3>Combo Networking (1 Tarjeta + 2 Stickers)</h3>
+                    <p class="product-desc">Lleva tu tarjeta física ejecutiva y 2 stickers extra (uno para tu teléfono personal y otro de repuesto). Incluye páginas Linkbio.</p>
+                    <span class="product-pricing">Ideal para profesionales independientes</span>
+                </div>
+                <div class="product-action">
+                    <span class="price-tag">$21.99</span>
+                    <button class="btn-add" onclick="agregarAlCarrito('Combo Networking (1 Tarjeta + 2 Stickers)', 21.99)">Agregar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pack Emprendedor Masivo -->
         <div class="product-card promo">
             <div class="product-image-box">
                 <span class="badge-tag">Pack Emprendedor</span>
-                <!-- Puedes cambiar el enlace de la imagen por una foto real de tus stickers -->
                 <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Pack Emprendedor Stickers">
             </div>
             <div class="product-body">
                 <div class="product-info">
                     <h3>Pack 12 Stickers NFC Pro</h3>
-                    <p class="product-desc">Ideal para equipar a todo tu equipo o sucursales. Incluye las 12 páginas Linkbio totalmente configuradas.</p>
+                    <p class="product-desc">Ideal para equipos de trabajo o múltiples sucursales. Incluye las 12 páginas Linkbio totalmente configuradas.</p>
                     <span class="product-pricing">Ahorro masivo por volumen | Páginas incluidas</span>
                 </div>
                 <div class="product-action">
                     <span class="price-tag">$14.99</span>
                     <button class="btn-add" onclick="agregarAlCarrito('Pack 12 Stickers NFC Pro + Páginas', 14.99)">Agregar</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pack Corporativo Tarjetas -->
-        <div class="product-card promo">
-            <div class="product-image-box">
-                <span class="badge-tag">Corporativo</span>
-                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Pack Tarjetas Corporativas">
-            </div>
-            <div class="product-body">
-                <div class="product-info">
-                    <h3>Pack 12 Tarjetas NFC PVC</h3>
-                    <p class="product-desc">Tarjetas de presentación inteligentes tamaño crédito con diseño ejecutivo y QR. A partir de 12 unidades bajan de precio.</p>
-                    <span class="product-pricing">Precio especial x mayor ($14.99 c/u)</span>
-                </div>
-                <div class="product-action">
-                    <span class="price-tag">$179.88</span>
-                    <button class="btn-add" onclick="agregarAlCarrito('Pack 12 Tarjetas NFC Corporativas (Precio x Mayor)', 179.88)">Agregar Pack</button>
                 </div>
             </div>
         </div>
@@ -408,7 +426,7 @@
                 <div class="product-info">
                     <h3>Tarjeta NFC Individual (Crédito)</h3>
                     <p class="product-desc">PVC acabado profesional con chip NFC y código QR. Incluye página Linkbio.</p>
-                    <span class="product-pricing">$19.99 c/u (Baja a $14.99 a partir de 12 unidades)</span>
+                    <span class="product-pricing">$19.99 c/u (Baja a $14.99 c/u a partir de 12 unidades)</span>
                 </div>
                 <div class="product-action">
                     <span class="price-tag">$19.99</span>
@@ -472,7 +490,7 @@
     <script>
         let cantidadStickers = 0;
         let cantidadTarjetasInd = 0;
-        let itemsEspeciales = []; // Para packs o placas
+        let itemsEspeciales = []; // Para combos y placas
 
         function cambiarCantidadSticker(delta) {
             cantidadStickers = Math.max(0, cantidadStickers + delta);
@@ -503,7 +521,7 @@
 
             let totalEspecialesPrecio = itemsEspeciales.reduce((acc, item) => acc + item.price, 0);
 
-            // Costo de página para stickers si son menos de 12
+            // Costo de página para stickers sueltos si son menos de 12
             let costoPaginaStickers = 0;
             let textoPaginaStickers = "";
             if (cantidadStickers > 0) {
